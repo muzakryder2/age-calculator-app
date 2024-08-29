@@ -27,6 +27,9 @@ function reset() {
   dayLabel.style.color = '#716f6f'
   monthLabel.style.color = '#716f6f'
   yearLabel.style.color = '#716f6f'
+  dayInput.style.borderColor = '#716f6f'
+  monthInput.style.borderColor = '#716f6f'
+  yearInput.style.borderColor = '#716f6f'
   dayError.classList.add('hidden')
   monthError.classList.add('hidden')
   yearError.classList.add('hidden')
@@ -45,25 +48,39 @@ function validateInputs() {
   if (!day || !month || !year) {
     if (!day) {
       dayError.classList.remove('hidden')
+      dayLabel.style.color = '#ff5757'
+      dayInput.style.borderColor = '#ff5757'
       return false
     }
     if (!month) {
       monthError.classList.remove('hidden')
+      monthLabel.style.color = '#ff5757'
+      monthInput.style.borderColor = '#ff5757'
       return false
     }
     if (!year) {
       yearError.classList.remove('hidden')
+      yearLabel.style.color = '#ff5757'
+      yearInput.style.borderColor = '#ff5757'
       return false
     }
   }
 
   if (year < new Date().getFullYear() - 120) {
+    dayLabel.style.color = '#ff5757'
+    dayInput.style.borderColor = '#ff5757'
+    monthLabel.style.color = '#ff5757'
+    monthInput.style.borderColor = '#ff5757'
+    yearLabel.style.color = '#ff5757'
+    yearInput.style.borderColor = '#ff5757'
     formError.classList.remove('hidden')
     return false
   }
 
   if (month < 1 || month > 12) {
     monthError.classList.remove('hidden')
+    monthLabel.style.color = '#ff5757'
+    monthInput.style.borderColor = '#ff5757'
     return false
   }
 
@@ -77,6 +94,12 @@ function validateInputs() {
     month === 12
   ) {
     if (day < 1 || day > 31) {
+      dayLabel.style.color = '#ff5757'
+      dayInput.style.borderColor = '#ff5757'
+      monthLabel.style.color = '#ff5757'
+      monthInput.style.borderColor = '#ff5757'
+      yearLabel.style.color = '#ff5757'
+      yearInput.style.borderColor = '#ff5757'
       formError.classList.remove('hidden')
       return false
     }
@@ -84,6 +107,12 @@ function validateInputs() {
 
   if (month === 4 || month === 6 || month === 9 || month === 11) {
     if (day < 1 || day > 30) {
+      dayLabel.style.color = '#ff5757'
+      dayInput.style.borderColor = '#ff5757'
+      monthLabel.style.color = '#ff5757'
+      monthInput.style.borderColor = '#ff5757'
+      yearLabel.style.color = '#ff5757'
+      yearInput.style.borderColor = '#ff5757'
       formError.classList.remove('hidden')
       return false
     }
@@ -92,23 +121,47 @@ function validateInputs() {
   if (month === 2) {
     if (year % 400 === 0) {
       if (day > 29) {
+        dayLabel.style.color = '#ff5757'
+        dayInput.style.borderColor = '#ff5757'
+        monthLabel.style.color = '#ff5757'
+        monthInput.style.borderColor = '#ff5757'
+        yearLabel.style.color = '#ff5757'
+        yearInput.style.borderColor = '#ff5757'
         formError.classList.remove('hidden')
         return false
       }
     } else if (year % 100 === 0 && year % 4 === 0) {
       if (day > 28) {
+        dayLabel.style.color = '#ff5757'
+        dayInput.style.borderColor = '#ff5757'
+        monthLabel.style.color = '#ff5757'
+        monthInput.style.borderColor = '#ff5757'
+        yearLabel.style.color = '#ff5757'
+        yearInput.style.borderColor = '#ff5757'
         formError.classList.remove('hidden')
         return false
       }
     } else if (year % 4 === 0) {
       if (day > 29) {
+        dayLabel.style.color = '#ff5757'
+        dayInput.style.borderColor = '#ff5757'
+        monthLabel.style.color = '#ff5757'
+        monthInput.style.borderColor = '#ff5757'
+        yearLabel.style.color = '#ff5757'
+        yearInput.style.borderColor = '#ff5757'
         formError.classList.remove('hidden')
         return false
       }
     } else {
       if (day > 28) {
-        formError.cl
-        return falseassList.remove('hidden')
+        dayLabel.style.color = '#ff5757'
+        dayInput.style.borderColor = '#ff5757'
+        monthLabel.style.color = '#ff5757'
+        monthInput.style.borderColor = '#ff5757'
+        yearLabel.style.color = '#ff5757'
+        yearInput.style.borderColor = '#ff5757'
+        formError.classList.remove('hidden')
+        return false
       }
     }
   }
@@ -118,6 +171,7 @@ function validateInputs() {
 
   if (today < userDate) {
     yearLabel.style.color = '#ff5757'
+    yearInput.style.borderColor = '#ff5757'
     yearError.classList.remove('hidden')
     return false
   }
@@ -156,26 +210,26 @@ function calculateResult() {
 
   if (ageDays < 0) {
     if (
-      thisMonth === 1 ||
-      thisMonth === 3 ||
-      thisMonth === 5 ||
-      thisMonth === 7 ||
-      thisMonth === 8 ||
-      thisMonth === 10 ||
-      thisMonth === 12
+      userMonth === 1 ||
+      userMonth === 3 ||
+      userMonth === 5 ||
+      userMonth === 7 ||
+      userMonth === 8 ||
+      userMonth === 10 ||
+      userMonth === 12
     ) {
       ageDays = 31 + ageDays
     }
 
     if (
-      thisMonth === 4 ||
-      thisMonth === 6 ||
-      thisMonth === 9 ||
-      thisMonth === 11
+      userMonth === 4 ||
+      userMonth === 6 ||
+      userMonth === 9 ||
+      userMonth === 11
     ) {
       ageDays = 30 + ageDays
     }
-    if (thisMonth === 2) {
+    if (userMonth === 2) {
       if (thisYear % 400 === 0) {
         ageDays = 29 + ageDays
       } else if (thisYear % 100 === 0 && thisYear % 4 === 0) {
