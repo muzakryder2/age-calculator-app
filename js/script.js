@@ -199,48 +199,58 @@ function calculateResult() {
   const thisMonth = today.getMonth() + 1
   const thisYear = today.getFullYear()
 
-  let ageYears = thisYear - userYear
-  let ageMonths = thisMonth - userMonth
-  let ageDays = thisDate - userDate
+  let ageYears = 0
+  let ageMonths = 0
+  let ageDays = 0
 
-  if (ageMonths < 0 || (ageMonths === 0 && ageDays < 0)) {
-    ageYears--
-    ageMonths = 12 + ageMonths
+  if (thisYear - userYear >= 0) {
+    ageYears = thisYear - userYear
   }
 
-  if (ageDays < 0) {
-    if (
-      userMonth === 1 ||
-      userMonth === 3 ||
-      userMonth === 5 ||
-      userMonth === 7 ||
-      userMonth === 8 ||
-      userMonth === 10 ||
-      userMonth === 12
-    ) {
-      ageDays = 31 + ageDays
-    }
+  if (thisMonth - userMonth >= 0) {
+    ageMonths = thisMonth - userMonth
+  } else if (thisMonth === userMonth && thisDate - userDate === 0) {
+    ageYears--
+    ageMonths = 11
+  } else {
+    ageYears--
+    ageMonths = 12 + thisMonth - userMonth
+  }
 
+  if (thisDate - userDate >= 0) {
+    ageDays = thisDate - userDate
+  } else {
     if (
-      userMonth === 4 ||
-      userMonth === 6 ||
-      userMonth === 9 ||
-      userMonth === 11
+      thisMonth === 1 ||
+      thisMonth === 3 ||
+      thisMonth === 5 ||
+      thisMonth === 7 ||
+      thisMonth === 8 ||
+      thisMonth === 10 ||
+      thisMonth === 12
     ) {
-      ageDays = 30 + ageDays
-    }
-    if (userMonth === 2) {
+      ageDays = 31 + thisDate - userDate
+    } else if (
+      thisMonth === 4 ||
+      thisMonth === 6 ||
+      thisMonth === 9 ||
+      thisMonth === 11
+    ) {
+      ageDays = 30 + thisDate - userDate
+    } else {
       if (thisYear % 400 === 0) {
-        ageDays = 29 + ageDays
+        ageDays = 29 + thisDate - userDate
       } else if (thisYear % 100 === 0 && thisYear % 4 === 0) {
-        ageDays = 28 + ageDays
+        ageDays = 28 + thisDate - userDate
       } else if (thisYear % 4 === 0) {
-        ageDays = 29 + ageDays
+        ageDays = 29 + thisDate - userDate
       } else {
-        ageDays = 28 + ageDays
+        ageDays = 28 + thisDate - userDate
       }
     }
   }
+
+  console.log(ageYears, ageMonths, ageDays)
 
   yearsResult.textContent = ageYears.toString().padStart(2, '0')
   monthsResult.textContent = ageMonths.toString().padStart(2, '0')
